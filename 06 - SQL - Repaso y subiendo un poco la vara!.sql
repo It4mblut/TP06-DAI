@@ -39,5 +39,57 @@ SELECT nombre AS beneficios_activos_beneficio_mayorIgual20 FROM beneficios WHERE
 --11. Obtener los beneficios cuyo descuento sea menor a 10 O mayor a 50. (filas 2)
 SELECT nombre AS beneficios_descuento FROM beneficios WHERE activo = 1 AND descuento <10 OR descuento>50
 
+--12. Obtener los comercios cuyo nombre empiece con 'M'. (filas 125)
+--13. Obtener los comercios cuyo nombre termine con 'SA'. (filas 13)
+--14. Obtener los comercios cuyo nombre contenga la palabra 'super' (en cualquier parte). (filas 3)
+--15. Obtener los usuarios cuya segunda letra del nombre sea una 'a'. (filas 63)
+--16. Obtener los usuarios cuyo apellido sea 'Gonzalez', 'Ruiz' o 'Gomez'. (filas 8)
+--17. Obtener los usuarios cuyo apellido NO sea 'Gonzalez', 'Ruiz' ni 'Gomez'. (filas 220)
+--18. Obtener los beneficios de los comercios activos (usando subconsulta con IN). (filas 274)
+--19. Obtener la misma lista que en el ejercicio 18, pero sin repetir combinaciones de nombre y descuento . (filas 197)
+--20. Obtener los beneficios que NO pertenecen a comercios activos. (filas 21)
+--21. Obtener los 5 beneficios con mayor descuento. (filas 5)
+
+
+--22. Obtener los usuarios que nacieron en el año 1981. (filas 6)
+--23. Obtener los usuarios que cumplen años en el mes de mayo. (filas 20)
+--24. Obtener el nombre, apellido y la edad de cada usuario (columna edad ), ordenado por edad descendente. (filas 228)
+--25. Obtener los canjes de beneficios ( beneficios_usuarios ) realizados en los últimos 30 días. (filas 49)
+--26. Obtener los canjes realizados entre el 1 de enero y el 31 de marzo de 2025. (filas 375)
+
+
+--27. Obtener los usuarios que NO tienen fecha de nacimiento cargada. (filas 0)
+--28. Obtener los comercios que tienen email cargado (no nulo) y además están activos. (filas 109)
+
+
+--29. Contar cuántos usuarios hay en total. (filas 228)
+--30. Contar cuántos usuarios tienen fecha de nacimiento cargada (y cuántos no).(filas 1)
+--31. Obtener el descuento máximo, mínimo y promedio de los beneficios activos. (filas 1)
+
+
+--32. Obtener el nombre del beneficio junto con el nombre del comercio que lo ofrece. (filas 295)
+--33. Obtener nombre y apellido de cada usuario junto con el nombre de su provincia. (filas 200)
+--34. Obtener todos los usuarios y, si tienen provincia, el nombre; si no, mostrar NULL. (filas 228)
+--35. Obtener todas las provincias y los usuarios que viven en ellas (aunque una provincia no tenga usuarios). (filas 219)
+--36. Obtener los usuarios que nunca canjearon un beneficio (usando LEFT JOIN). (filas 0)
+--37. Obtener el nombre del usuario, nombre del beneficio, nombre del comercio y fecha del canje — triple JOIN. (filas 506)
+
+
+--38. Nombre del comercio y cantidad de beneficios que ofrece, ordenado de mayor a menor. (filas 98)
+--39. Nombre del comercio y cantidad de beneficios que ofrece, pero solo los comercios que tienen más de 3 beneficios. (filas 25)
+--40. Nombre del comercio y suma total de descuentos de sus beneficios activos, ordenado de mayor a menor. (filas 16)
+--41. Nombre del comercio, descuento promedio y cantidad de beneficios, solo los comercios que tengan promedio mayor a 15. (filas 84)
+--42. Nombre de la provincia y cantidad de beneficios distintos canjeados por los usuarios de esa provincia, ordenada de mayor a menor. (filas 6)
+--43. Nombre de la provincia y cantidad de usuarios que viven en ella, usando INNER JOIN (no aparecen provincias sin usuarios). (filas 6)
+--44. Nombre de TODAS las provincias y cantidad de usuarios que viven en cada una, usando LEFT JOIN — las provincias sin usuarios aparecen con 0. (filas 25)
+--45. Top 5 comercios con más canjes de sus beneficios (mostrar nombre del comercio y cantidad de canjes). (filas 5)
+--46. Apellido, nombre y cantidad de beneficios canjeados de cada usuario (incluir usuarios que no canjearon nunca, mostrando 0). (filas 201)
+
+
+
+--47. Obtener el comercio con mayor promedio de descuento (mostrar nombre y promedio). (filas 1)
+--48. Nombre de la provincia, cantidad de usuarios y cantidad total de canjes que hicieron esos usuarios. (filas 25)
+
+
 
 GO
