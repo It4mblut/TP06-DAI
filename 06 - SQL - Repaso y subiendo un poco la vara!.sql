@@ -124,11 +124,17 @@ RIGHT JOIN provincias
 ON usuarios.id_provincia = provincias.id 
 
 --36. Obtener los usuarios que nunca canjearon un beneficio (usando LEFT JOIN). (filas 0)
-
-
+SELECT usuarios.nombre, usuarios.apellido FROM usuarios
+LEFT JOIN beneficios_usuarios 
+ON usuarios.id = beneficios_usuarios.id_usuario
+WHERE beneficios_usuarios.id_usuario IS NULL
 
 --37. Obtener el nombre del usuario, nombre del beneficio, nombre del comercio y fecha del canje — triple JOIN. (filas 506)
-
+SELECT usuarios.nombre, beneficios.nombre, comercios.nombre, beneficios_usuarios.fecha
+FROM beneficios_usuarios
+INNER JOIN usuarios ON beneficios_usuarios.id_usuario = usuarios.id
+INNER JOIN beneficios ON beneficios_usuarios.id_beneficio = beneficios.id
+INNER JOIN comercios ON beneficios.id_comercio = comercios.id
 
 --38. Nombre del comercio y cantidad de beneficios que ofrece, ordenado de mayor a menor. (filas 98)
 --39. Nombre del comercio y cantidad de beneficios que ofrece, pero solo los comercios que tienen más de 3 beneficios. (filas 25)
