@@ -37,7 +37,7 @@ SELECT nombre AS beneficios_activos FROM beneficios WHERE activo = 1
 SELECT nombre AS beneficios_activos_beneficio_mayorIgual20 FROM beneficios WHERE activo = 1 AND descuento >= 20
 
 --11. Obtener los beneficios cuyo descuento sea menor a 10 O mayor a 50. (filas 2)
-SELECT nombre AS beneficios_activos_beneficio_mayorIgual20 FROM beneficios WHERE activo = 1 AND descuento <10 OR descuento<50
+SELECT nombre AS beneficios_descuento FROM beneficios WHERE activo = 1 AND descuento <10 OR descuento>50
 
 
 GO
