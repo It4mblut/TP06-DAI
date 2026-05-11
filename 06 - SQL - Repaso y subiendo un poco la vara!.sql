@@ -31,5 +31,13 @@ FROM usuarios
 ORDER BY largo_nombre DESC
 
 --9. Obtener todos los beneficios que están activos. (filas 25)
+SELECT nombre AS beneficios_activos FROM beneficios WHERE activo = 1
+
+--10. Obtener los beneficios activos Y con descuento mayor o igual a 20. (filas 19)
+SELECT nombre AS beneficios_activos_beneficio_mayorIgual20 FROM beneficios WHERE activo = 1 AND descuento >= 20
+
+--11. Obtener los beneficios cuyo descuento sea menor a 10 O mayor a 50. (filas 2)
+SELECT nombre AS beneficios_activos_beneficio_mayorIgual20 FROM beneficios WHERE activo = 1 AND descuento <10 OR descuento<50
+
 
 GO
