@@ -40,14 +40,32 @@ SELECT nombre AS beneficios_activos_beneficio_mayorIgual20 FROM beneficios WHERE
 SELECT nombre AS beneficios_descuento FROM beneficios WHERE activo = 1 AND descuento <10 OR descuento>50
 
 --12. Obtener los comercios cuyo nombre empiece con 'M'. (filas 125)
+SELECT nombre FROM comercios WHERE nombre LIKE 'M%'
+
 --13. Obtener los comercios cuyo nombre termine con 'SA'. (filas 13)
+SELECT nombre FROM comercios WHERE nombre LIKE '%SA'
+
 --14. Obtener los comercios cuyo nombre contenga la palabra 'super' (en cualquier parte). (filas 3)
+SELECT nombre FROM comercios WHERE nombre LIKE '%super%'
+
 --15. Obtener los usuarios cuya segunda letra del nombre sea una 'a'. (filas 63)
+SELECT nombre FROM usuarios WHERE nombre LIKE '_a%'
+
 --16. Obtener los usuarios cuyo apellido sea 'Gonzalez', 'Ruiz' o 'Gomez'. (filas 8)
+SELECT nombre, apellido FROM usuarios WHERE apellido IN ('Gonzalez', 'Ruiz', 'Gomez')
+
 --17. Obtener los usuarios cuyo apellido NO sea 'Gonzalez', 'Ruiz' ni 'Gomez'. (filas 220)
+SELECT nombre, apellido FROM usuarios WHERE apellido NOT IN ('Gonzalez', 'Ruiz', 'Gomez')
+
 --18. Obtener los beneficios de los comercios activos (usando subconsulta con IN). (filas 274)
+SELECT nombre, descuento FROM beneficios WHERE id_comercio IN (SELECT id FROM comercios WHERE activo = 1)
+
 --19. Obtener la misma lista que en el ejercicio 18, pero sin repetir combinaciones de nombre y descuento . (filas 197)
+SELECT DISTINCT nombre , descuento FROM beneficios WHERE id_comercio IN (SELECT id FROM comercios WHERE activo = 1)
+
 --20. Obtener los beneficios que NO pertenecen a comercios activos. (filas 21)
+SELECT descuento FROM beneficios WHERE id_comercio NOT IN (SELECT id FROM comercios WHERE activo = 1)
+
 --21. Obtener los 5 beneficios con mayor descuento. (filas 5)
 
 
