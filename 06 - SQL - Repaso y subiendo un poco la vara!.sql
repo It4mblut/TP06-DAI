@@ -21,9 +21,7 @@ SELECT DISTINCT nombre FROM usuarios
 ORDER BY nombre
 
 --7. Obtener los primeros 10 usuarios ordenados por apellido. (filas 10)
-SELECT TOP 10 nombre, apellido
-FROM usuarios
-ORDER BY apellido
+SELECT TOP 10 nombre, apellido FROM usuarios ORDER BY apellido
 
 --8. Obtener el nombre y apellido de los usuarios junto con el largo de su nombre (columna largo_nombre ), ordenado por largo descendente. (filas 228)
 SELECT nombre, apellido, LEN(nombre) AS largo_nombre
@@ -67,29 +65,68 @@ SELECT DISTINCT nombre , descuento FROM beneficios WHERE id_comercio IN (SELECT 
 SELECT descuento FROM beneficios WHERE id_comercio NOT IN (SELECT id FROM comercios WHERE activo = 1)
 
 --21. Obtener los 5 beneficios con mayor descuento. (filas 5)
-
+SELECT TOP 5 nombre, descuento FROM beneficios
+ORDER BY descuento DESC
 
 --22. Obtener los usuarios que nacieron en el año 1981. (filas 6)
---23. Obtener los usuarios que cumplen años en el mes de mayo. (filas 20)
---24. Obtener el nombre, apellido y la edad de cada usuario (columna edad ), ordenado por edad descendente. (filas 228)
---25. Obtener los canjes de beneficios ( beneficios_usuarios ) realizados en los últimos 30 días. (filas 49)
---26. Obtener los canjes realizados entre el 1 de enero y el 31 de marzo de 2025. (filas 375)
+SELECT nombre, apellido FROM usuarios WHERE YEAR(fecha_nacimiento) = 1981
 
+--23. Obtener los usuarios que cumplen años en el mes de mayo. (filas 20)
+SELECT nombre, apellido FROM usuarios WHERE MONTH(fecha_nacimiento) = 5
+
+--24. Obtener el nombre, apellido y la edad de cada usuario (columna edad ), ordenado por edad descendente. (filas 228)
+SELECT nombre, apellido, DATEDIFF(YEAR, fecha_nacimiento, GETDATE()) AS edad FROM usuarios
+ORDER BY edad DESC
+
+--25. Obtener los canjes de beneficios ( beneficios_usuarios ) realizados en los últimos 30 días. (filas 49)
+SELECT * FROM beneficios_usuarios WHERE fecha >= DATEADD(DAY, -30, GETDATE()) --Los canjes son muy viejos, estamos a 11/5/26, el mas reciente marca que fue el 2026-03-31 16:06:23.000, asi que no aparece nada en las tablas
+	
+--26. Obtener los canjes realizados entre el 1 de enero y el 31 de marzo de 2025. (filas 375)
+SELECT * FROM beneficios_usuarios WHERE fecha >= '2025-01-01' AND fecha < '2025-04-01'
 
 --27. Obtener los usuarios que NO tienen fecha de nacimiento cargada. (filas 0)
---28. Obtener los comercios que tienen email cargado (no nulo) y además están activos. (filas 109)
+SELECT nombre, apellido FROM usuarios WHERE fecha_nacimiento = NULL
 
+--28. Obtener los comercios que tienen email cargado (no nulo) y además están activos. (filas 109)
+SELECT nombre FROM comercios WHERE email IS NOT NULL AND activo=1
 
 --29. Contar cuántos usuarios hay en total. (filas 228)
---30. Contar cuántos usuarios tienen fecha de nacimiento cargada (y cuántos no).(filas 1)
---31. Obtener el descuento máximo, mínimo y promedio de los beneficios activos. (filas 1)
+SELECT COUNT(*) AS usuarios_totales FROM usuarios
 
+--30. Contar cuántos usuarios tienen fecha de nacimiento cargada (y cuántos no).(filas 1)
+SELECT COUNT(fecha_nacimiento) AS usuarios_con_nacimiento, COUNT(*) - COUNT(fecha_nacimiento) AS usuarios_sin_nacimiento FROM usuarios
+
+--31. Obtener el descuento máximo, mínimo y promedio de los beneficios activos. (filas 1)
+SELECT MAX(descuento) AS maximo, MIN(descuento) AS minimo, AVG(descuento) AS promedio FROM beneficios WHERE activo = 1 
 
 --32. Obtener el nombre del beneficio junto con el nombre del comercio que lo ofrece. (filas 295)
+SELECT beneficios.nombre, comercios.nombre AS comercio
+FROM beneficios
+INNER JOIN comercios
+ON beneficios.id_comercio = comercios.id
+
 --33. Obtener nombre y apellido de cada usuario junto con el nombre de su provincia. (filas 200)
+SELECT usuarios.nombre, usuarios.apellido, provincias.nombre AS provincia
+FROM usuarios
+INNER JOIN provincias
+ON usuarios.id_provincia = provincias.id
+
 --34. Obtener todos los usuarios y, si tienen provincia, el nombre; si no, mostrar NULL. (filas 228)
+SELECT usuarios.nombre, usuarios.apellido, provincias.nombre AS provincia
+FROM usuarios
+LEFT JOIN provincias
+ON usuarios.id_provincia = provincias.id
+
 --35. Obtener todas las provincias y los usuarios que viven en ellas (aunque una provincia no tenga usuarios). (filas 219)
+SELECT provincias.nombre AS provincia, usuarios.nombre, usuarios.apellido --Dan 224 filas, no 219, pero el código está bien (solo no uní nombre y apellido)
+FROM usuarios
+RIGHT JOIN provincias
+ON usuarios.id_provincia = provincias.id 
+
 --36. Obtener los usuarios que nunca canjearon un beneficio (usando LEFT JOIN). (filas 0)
+
+
+
 --37. Obtener el nombre del usuario, nombre del beneficio, nombre del comercio y fecha del canje — triple JOIN. (filas 506)
 
 
