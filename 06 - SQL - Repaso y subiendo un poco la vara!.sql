@@ -188,10 +188,19 @@ LEFT JOIN usuarios ON provincias.id = usuarios.id_provincia
 GROUP BY provincias.nombre
 
 --45. Top 5 comercios con más canjes de sus beneficios (mostrar nombre del comercio y cantidad de canjes). (filas 5)
-
+SELECT TOP 5 comercios.nombre, COUNT(beneficios_usuarios.id_beneficio) AS cantidad_canjes
+FROM comercios
+INNER JOIN beneficios ON comercios.id = beneficios.id_comercio
+INNER JOIN beneficios_usuarios ON beneficios.id = beneficios_usuarios.id_beneficio
+GROUP BY comercios.nombre
+ORDER BY cantidad_canjes DESC
 
 --46. Apellido, nombre y cantidad de beneficios canjeados de cada usuario (incluir usuarios que no canjearon nunca, mostrando 0). (filas 201)
-
+SELECT CONCAT(usuarios.apellido, usuarios.nombre) AS nombre_completo, COUNT(beneficios_usuarios.id_beneficio) AS cantidad_beneficios
+FROM usuarios 
+RIGHT JOIN beneficios_usuarios ON  usuarios.id = beneficios_usuarios.id_usuario
+GROUP BY CONCAT(usuarios.apellido, usuarios.nombre)
+ORDER BY cantidad_beneficios DESC
 
 
 --47. Obtener el comercio con mayor promedio de descuento (mostrar nombre y promedio). (filas 1)
