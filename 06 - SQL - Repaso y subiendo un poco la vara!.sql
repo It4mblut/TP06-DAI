@@ -204,6 +204,12 @@ ORDER BY cantidad_beneficios DESC
 
 
 --47. Obtener el comercio con mayor promedio de descuento (mostrar nombre y promedio). (filas 1)
+SELECT TOP 1 comercios.nombre, AVG(beneficios.descuento) AS promedio_descuento
+FROM comercios
+INNER JOIN beneficios ON comercios.id = beneficios.id_comercio
+GROUP BY comercios.nombre
+ORDER BY promedio_descuento DESC
+
 --48. Nombre de la provincia, cantidad de usuarios y cantidad total de canjes que hicieron esos usuarios. (filas 25)
 
 
