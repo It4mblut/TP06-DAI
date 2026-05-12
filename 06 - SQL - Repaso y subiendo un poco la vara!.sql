@@ -137,13 +137,56 @@ INNER JOIN beneficios ON beneficios_usuarios.id_beneficio = beneficios.id
 INNER JOIN comercios ON beneficios.id_comercio = comercios.id
 
 --38. Nombre del comercio y cantidad de beneficios que ofrece, ordenado de mayor a menor. (filas 98)
+SELECT comercios.nombre, COUNT(beneficios.id) AS cantidad_beneficios
+FROM comercios
+INNER JOIN beneficios ON comercios.id = beneficios.id_comercio
+GROUP BY comercios.nombre
+ORDER BY cantidad_beneficios DESC
+
 --39. Nombre del comercio y cantidad de beneficios que ofrece, pero solo los comercios que tienen más de 3 beneficios. (filas 25)
+SELECT comercios.nombre, COUNT(beneficios.id) AS cantidad_beneficios
+FROM comercios
+INNER JOIN beneficios ON comercios.id = beneficios.id_comercio
+GROUP BY comercios.nombre
+HAVING COUNT(beneficios.id) > 3
+ORDER BY cantidad_beneficios DESC
+
 --40. Nombre del comercio y suma total de descuentos de sus beneficios activos, ordenado de mayor a menor. (filas 16)
+SELECT comercios.nombre, SUM(beneficios.descuento) AS descuento_beneficios
+FROM comercios
+INNER JOIN beneficios ON comercios.id = beneficios.id_comercio
+WHERE  beneficios.activo = 1
+GROUP BY comercios.nombre
+ORDER BY descuento_beneficios DESC
+
 --41. Nombre del comercio, descuento promedio y cantidad de beneficios, solo los comercios que tengan promedio mayor a 15. (filas 84)
+SELECT comercios.nombre, AVG(beneficios.descuento) AS promedio_descuento, COUNT(beneficios.id) AS cantidad_beneficios
+FROM comercios
+INNER JOIN beneficios ON comercios.id = beneficios.id_comercio
+GROUP BY comercios.nombre
+HAVING AVG(beneficios.descuento) >15
+
 --42. Nombre de la provincia y cantidad de beneficios distintos canjeados por los usuarios de esa provincia, ordenada de mayor a menor. (filas 6)
+SELECT provincias.nombre, COUNT(DISTINCT beneficios_usuarios.id_beneficio) AS cantidad_beneficios_distintos
+FROM provincias
+INNER JOIN usuarios ON provincias.id = usuarios.id_provincia
+INNER JOIN beneficios_usuarios ON usuarios.id = beneficios_usuarios.id_usuario
+GROUP BY provincias.nombre
+ORDER BY cantidad_beneficios_distintos DESC
+
 --43. Nombre de la provincia y cantidad de usuarios que viven en ella, usando INNER JOIN (no aparecen provincias sin usuarios). (filas 6)
+SELECT provincias.nombre, COUNT(usuarios.id) AS cantidad_usuarios
+FROM provincias
+INNER JOIN usuarios ON provincias.id = usuarios.id_provincia
+GROUP BY provincias.nombre
+ORDER BY cantidad_usuarios DESC
+
 --44. Nombre de TODAS las provincias y cantidad de usuarios que viven en cada una, usando LEFT JOIN — las provincias sin usuarios aparecen con 0. (filas 25)
+
+
 --45. Top 5 comercios con más canjes de sus beneficios (mostrar nombre del comercio y cantidad de canjes). (filas 5)
+
+
 --46. Apellido, nombre y cantidad de beneficios canjeados de cada usuario (incluir usuarios que no canjearon nunca, mostrando 0). (filas 201)
 
 
