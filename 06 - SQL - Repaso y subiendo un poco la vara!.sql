@@ -178,11 +178,14 @@ ORDER BY cantidad_beneficios_distintos DESC
 SELECT provincias.nombre, COUNT(usuarios.id) AS cantidad_usuarios
 FROM provincias
 INNER JOIN usuarios ON provincias.id = usuarios.id_provincia
+WHERE provincias.nombre IS NOT NULL
 GROUP BY provincias.nombre
-ORDER BY cantidad_usuarios DESC
 
 --44. Nombre de TODAS las provincias y cantidad de usuarios que viven en cada una, usando LEFT JOIN — las provincias sin usuarios aparecen con 0. (filas 25)
-
+SELECT provincias.nombre, COUNT(usuarios.id) AS cantidad_usuarios
+FROM provincias
+LEFT JOIN usuarios ON provincias.id = usuarios.id_provincia
+GROUP BY provincias.nombre
 
 --45. Top 5 comercios con más canjes de sus beneficios (mostrar nombre del comercio y cantidad de canjes). (filas 5)
 
